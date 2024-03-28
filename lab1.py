@@ -45,11 +45,6 @@ def printPlots3D(f, optimum, trace, delta=1e-2, dots=1e3):
 
     plt.show()
 
-    fig, ax = plt.subplots(subplot_kw={"projection": "3d"})
-    surf = ax.plot_surface(X, Y, Z, cmap="coolwarm")
-
-    plt.show()
-
 
 # Для евклидовой нормы число обусловленности - отношение наибольшего сингулярного числа к наименьшему
 # Функция возращает матрицу с заданным отношением, построенную с помощью SVD (singular value decomposition)
@@ -200,7 +195,7 @@ def nelder_mead(f, start, N = 100000, eps = 1e-3):
     result = opt.minimize(f_, start, method='Nelder-Mead', options={'return_all': True, 'maxiter': N, 'xatol': eps})
     return result["x"], result["allvecs"], result["nit"], result["nfev"]
 
-
+"""
 fs = [lambda x, y: x**2 + y**2 - x*y,
     lambda x, y: x**4 + y**2 + (x**2)*y,
     lambda x, y: (1 - x)**2 + 100*(y - x**2)**2]
@@ -233,7 +228,6 @@ for i in range(2, len(fs)):
             #print(countIt, countF, "|", la.norm(optimum - trace[-2]), "|", la.norm(optimum - realOpts[i]))
             printPlots3D(fs[i], optimum, trace)
 
-"""
 for i in range(2, 21):
     f, grad, prF = function_by(i, 100)
     start = np.array([1 for n in range(i)])
@@ -288,11 +282,3 @@ for i in range(2, 3):
     print(countIt)
     printPlots3D(fs_mm[i], optimum, trace)
 """
-
-
-#printPlots3D(f, interval=INTERVAL, trace=gradient_descent(f, df, start, golden_ratio)[1])
-#printPlots3D(f, interval=INTERVAL, trace=gradient_descent(f, df, start, None, 1e-4)[1])
-#printPlots3D(real_prF, trace=opt.minimize(real_f, start, method='Nelder-Mead', options={'return_all': True})["allvecs"])
-#print(opt.minimize(f, start, method='Nelder-Mead', options={'return_all': True})["allvecs"])
-
-
